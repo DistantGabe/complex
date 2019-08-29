@@ -1,0 +1,35 @@
+{
+ "AWSEBDockerrunVersion": 2,
+ "containerDefinitions": [
+  {
+   "name": "client",
+   "image": "distantgabe/multi-client",
+   "hostname": "client",
+   "essential": false
+  },
+  {
+   "name": "server",
+   "image": "distantgabe/multi-server",
+   "hostname": "api",
+   "essential": false
+  },
+  {
+   "name": "worker",
+   "image": "distantgabe/multi-worker",
+   "hostname": "worker",
+   "essential": false
+  },
+  {
+   "name": "nginx",
+   "image": "distantgabe/multi-nginx",
+   "essential": true,
+   "portMappings": [
+    {
+     "hostPort": 80,
+     "containerPort": 80
+    }
+   ],
+   "links": ["client", "server"]
+  }
+ ]
+}
